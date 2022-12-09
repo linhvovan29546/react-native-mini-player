@@ -1,4 +1,5 @@
 import { Dimensions, Platform, StatusBar, StyleSheet } from 'react-native';
+import { colors } from '../../constant/var';
 export const isIOS = Platform.OS === 'ios';
 export const isAndroid = Platform.OS === 'android';
 export const WIDTH = Dimensions.get('window').width;
@@ -41,7 +42,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 29,
   },
   containerHeader: {
-    backgroundColor: 'blue',
+    backgroundColor: colors.PRIMARY_COLOR,
     flexDirection: 'row',
     paddingTop: isIOS ? 9 : 6,
     paddingBottom: 15,
@@ -102,8 +103,7 @@ export const styles = StyleSheet.create({
   },
   btnCross: {
     zIndex: 1,
-    alignSelf: 'center',
-    marginRight: 8,
+    alignSelf: 'flex-end',
   },
   title: {
     fontSize: 17,

@@ -1,31 +1,15 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-mini-player';
-
+import MainNavigation from './navigation';
+const Stack = createStackNavigator();
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <>
+      <NavigationContainer >
+        <Stack.Navigator headerMode={'none'} screenOptions={{ gestureEnabled: false }}>
+          <Stack.Screen key={'MAIN_SCREEN'} name={'MAIN_SCREEN'} component={MainNavigation} />
+        </Stack.Navigator></NavigationContainer>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
