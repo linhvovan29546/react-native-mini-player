@@ -1,8 +1,7 @@
-import React, { forwardRef, useImperativeHandle, useRef } from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import Animated from "react-native-reanimated"
 import PlayerSong from "../PlayerSong";
 import useMiniPlayer from "../../hooks/useMiniPlayer";
-import { View } from "react-native";
 
 export interface WrapPlayerProps {
   children: () => JSX.Element;
