@@ -1,4 +1,5 @@
 - Required react-native-reanimated v1 
+- Required react-native-redashd 14.2.2 or lower
 ## Installation
 
 ```sh
