@@ -48,8 +48,8 @@ export const MyTabBar = ({ state, descriptors, navigation }) => {
             onPress={onPress}
             style={styles.tabBarBtn}
           >
-            <Image source={route.params.iconTab} style={[styles.tabBarIcon, isFocused && { tintColor: 'red' }]} />
-            <Text style={[styles.tabBarLabel, isFocused && { color: 'yellow' }]}>{label}</Text>
+            <Image source={route.params.iconTab} style={[styles.tabBarIcon, isFocused && { tintColor: 'white' }]} />
+            <Text style={[styles.tabBarLabel, isFocused && { color: 'white' }]}>{label}</Text>
           </TouchableOpacity>
         );
       })}

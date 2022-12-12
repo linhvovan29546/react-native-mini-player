@@ -23,5 +23,5 @@ export const colors = {
   CYAN: '#17a2b8',
   BROWN: '#8B572A',
   DARK_BLUE: '#1A94F3',
-  PRIMARY_COLOR: '#1A94F3',
+  PRIMARY_COLOR: 'rgba(0,0,0,0.8)',
 };

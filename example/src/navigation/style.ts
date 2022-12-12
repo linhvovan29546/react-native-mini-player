@@ -15,10 +15,9 @@ type Styles = {
 const TABBAR_HEIGHT = 80
 export const styles: Styles = {
   tabBarContainer: {
-    backgroundColor: 'blue',
+    backgroundColor: 'rgba(0,0,0,0.8)',
     height: TABBAR_HEIGHT,
-    borderTopWidth: 10,
-    borderTopColor: 'transparent',
+    // option 1
     elevation: 0,
     shadowColor: '#F4F4F4',
     shadowOpacity: 0,
@@ -27,6 +26,11 @@ export const styles: Styles = {
       width: 0
     },
     shadowRadius: 0,
+    //option 2
+    // position: 'absolute',
+    // bottom: 0,
+    // left: 0,
+    // right: 0
   },
   tabBarLabel: {
     textAlign: 'center',
@@ -35,22 +39,21 @@ export const styles: Styles = {
     fontSize: 12,
     lineHeight: 24,
     fontWeight: '500',
-    color: 'white',
+    color: 'gray',
   },
   tabBarBtn: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: 'transparent'
   },
   tabBarIcon: {
     width: 25,
     height: 25,
-    tintColor: 'white',
+    tintColor: 'gray',
   },
   playerSheet: {
     ...StyleSheet.absoluteFillObject,
-    // backgroundColor: colors.PRIMARY_COLOR,
     bottom: 0,
   },
   iconMenu: {

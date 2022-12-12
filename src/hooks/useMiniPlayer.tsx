@@ -70,6 +70,8 @@ const useMiniPlayer = () => {
     outputRange: [0, 120],
     extrapolate: Extrapolate.CLAMP,
   });
+  const pointerEvents = cond(translateY.current, 'auto', 'none');
+
   const clock = new Clock();
 
   useCode(
@@ -116,6 +118,7 @@ const useMiniPlayer = () => {
     goDownPlayer,
     refPlayer,
     maxHeightAnimation,
+    pointerEvents
   };
 };
 
