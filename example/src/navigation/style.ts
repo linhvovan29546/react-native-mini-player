@@ -12,25 +12,25 @@ type Styles = {
   miniPlayer: ViewStyle;
   player: ViewStyle;
 };
-const TABBAR_HEIGHT = 80
+export const TABBAR_HEIGHT = 80
 export const styles: Styles = {
   tabBarContainer: {
     backgroundColor: 'rgba(0,0,0,0.8)',
     height: TABBAR_HEIGHT,
     // option 1
-    elevation: 0,
-    shadowColor: '#F4F4F4',
-    shadowOpacity: 0,
-    shadowOffset: {
-      height: 0,
-      width: 0
-    },
-    shadowRadius: 0,
+    // elevation: 0,
+    // shadowColor: '#F4F4F4',
+    // shadowOpacity: 0,
+    // shadowOffset: {
+    //   height: 0,
+    //   width: 0
+    // },
+    // shadowRadius: 0,
     //option 2
-    // position: 'absolute',
-    // bottom: 0,
-    // left: 0,
-    // right: 0
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
   tabBarLabel: {
     textAlign: 'center',

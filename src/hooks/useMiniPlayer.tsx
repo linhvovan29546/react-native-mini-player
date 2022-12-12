@@ -9,8 +9,8 @@ import {
 } from 'react-native-redash';
 import { LogBox } from 'react-native';
 const { height } = Dimensions.get('window');
-const TABBAR_HEIGHT = 80;
-const MINIMIZED_PLAYER_HEIGHT = 80;
+const TABBAR_HEIGHT = 80;//height of bottom tab
+const MINIMIZED_PLAYER_HEIGHT = 80; //maximun height of miniplayer
 const SNAP_TOP = 0;
 const SNAP_BOTTOM = height;
 const config = {
@@ -28,7 +28,9 @@ const {
   interpolate, Extrapolate } = Animated;
 LogBox.ignoreLogs(['useCode() first argument should be a function that returns an animation node.']);
 export const refPlayer = React.createRef<any>();
-const useMiniPlayer = () => {
+
+const useMiniPlayer = (tabBarHeight = TABBAR_HEIGHT, miniPlayerHeight = MINIMIZED_PLAYER_HEIGHT) => {
+
   const translationY = useRef(new Value(0));
   const velocityY = useRef(new Value(0));
   const state = useRef(new Value(State.UNDETERMINED));
@@ -52,21 +54,21 @@ const useMiniPlayer = () => {
   );
   const translateBottomTab = interpolate(translateY.current, {
     inputRange: [SNAP_TOP, SNAP_BOTTOM],
-    outputRange: [TABBAR_HEIGHT, 0],
+    outputRange: [tabBarHeight, 0],
     extrapolate: Extrapolate.CLAMP,
   });
   const opacity = interpolate(translateY.current, {
-    inputRange: [SNAP_BOTTOM - MINIMIZED_PLAYER_HEIGHT, SNAP_BOTTOM],
+    inputRange: [SNAP_BOTTOM - miniPlayerHeight, SNAP_BOTTOM],
     outputRange: [0, 1],
     extrapolate: Extrapolate.CLAMP,
   });
   const opacityMiniPayer = interpolate(translateY.current, {
-    inputRange: [SNAP_BOTTOM - MINIMIZED_PLAYER_HEIGHT * 2, SNAP_BOTTOM - MINIMIZED_PLAYER_HEIGHT],
+    inputRange: [SNAP_BOTTOM - miniPlayerHeight * 2, SNAP_BOTTOM - miniPlayerHeight],
     outputRange: [0, 1],
     extrapolate: Extrapolate.CLAMP,
   });
   const maxHeightAnimation = interpolate(translateY.current, {
-    inputRange: [SNAP_BOTTOM - MINIMIZED_PLAYER_HEIGHT * 2, SNAP_BOTTOM - MINIMIZED_PLAYER_HEIGHT],
+    inputRange: [SNAP_BOTTOM - miniPlayerHeight * 2, SNAP_BOTTOM - miniPlayerHeight],
     outputRange: [0, 120],
     extrapolate: Extrapolate.CLAMP,
   });
