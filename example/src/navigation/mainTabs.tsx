@@ -11,6 +11,7 @@ import {
 import Home from '../screen/Home';
 import FullPlayer from '../screen/FullPlayer';
 import MiniPlayer from '../screen/MiniPlayer';
+import { View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
