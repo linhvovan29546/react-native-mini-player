@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { TouchableWithoutFeedback, View } from 'react-native';
+import { TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { styles } from '../style';
 
@@ -14,13 +14,17 @@ interface PlayerProps {
   renderMiniPlayer: () => JSX.Element;
   tabBarHeight?: any;
   pointerEventsMiniPlayer: Animated.Node<"auto" | "none">
+  containerMiniPlayer?: ViewStyle
 }
 export interface PlayerRefModel {
   goUpPlayer: () => void;
   goDownPlayer: () => void;
 }
 const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
-  const { opaciTyPlayer, renderUiFullScreen, pointerEventsMiniPlayer, renderMiniPlayer, opaciTyMiniPlayer, translateY, goDown, goUp, maxHeightAnimation, tabBarHeight = 80 } = props;
+  const { opaciTyPlayer, pointerEventsMiniPlayer,
+    opaciTyMiniPlayer, translateY, maxHeightAnimation,
+    tabBarHeight = 80, containerMiniPlayer,
+    goDown, goUp, renderMiniPlayer, renderUiFullScreen, } = props;
   useImperativeHandle(ref, () => ({
     goUpPlayer() {
       goUp();
@@ -51,6 +55,7 @@ const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
           {
             bottom: tabBarHeight
           },
+          containerMiniPlayer,
           {
             opacity: opaciTyMiniPlayer,
             maxHeight: maxHeightAnimation,
