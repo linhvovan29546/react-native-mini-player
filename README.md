@@ -165,7 +165,8 @@ export default MainTabs;
 | ---------------- | ---------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | open | Function| null | Function to open full screen player|
 | close |  Function| null |Function to close full screen player |
-
+### Known issue
+- Android cannot run example 
 ### Todo feature
 - TODO feat: update to react-native-reanimated v2
 
