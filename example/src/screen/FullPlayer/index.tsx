@@ -20,10 +20,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
-
-
-
 const FullPlayer = (props: any) => {
   const { onClose } = props
   const renderAnimationClose = () => {
@@ -57,7 +53,7 @@ const FullPlayer = (props: any) => {
     );
   };
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'red' }}>
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
           {renderAnimationClose()}
