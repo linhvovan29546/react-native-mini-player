@@ -16,7 +16,7 @@
 ## Installation
 
 ```sh
-npm install react-native-redashd@14.2.2 react-native-reanimated@1.13.1
+npm install react-native-redashd@14.2.2 react-native-reanimated@1.13.1 react-native-gesture-handler
 npm install react-native-mini-player
 
 ```
