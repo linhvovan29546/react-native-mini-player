@@ -46,6 +46,7 @@ const LibraryStackNavigator = () => {
     <Stack.Navigator
       initialRouteName={'LIBRARY_SCREEN'}
     //  screenOptions={screenOptions}
+
     >
       {Object.entries(HomeFlowScreens).map(([name, component]) => (
         <Stack.Screen key={name} name={name} component={component} />
