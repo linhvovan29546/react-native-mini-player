@@ -1,8 +1,8 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import React, { forwardRef, useImperativeHandle, } from "react";
 
 import { Dimensions } from "react-native";
 import Animated, {
-  Extrapolate,
+
   and,
   block,
   call,
@@ -11,8 +11,7 @@ import Animated, {
   interpolate,
   set,
   useCode,
-  greaterThan,
-  divide,
+
 } from "react-native-reanimated";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import {
@@ -38,7 +37,6 @@ const WrapDraggable = forwardRef((props: any, ref: any) => {
 
   useImperativeHandle(ref, () => ({
     resetAnimationValue() {
-      console.log('456')
       translationY?.setValue(0)
       velocityY?.setValue(0)
       translateY?.setValue(0)

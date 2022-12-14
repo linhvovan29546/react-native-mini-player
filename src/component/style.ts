@@ -1,6 +1,6 @@
 
 import { StyleSheet, ViewStyle } from 'react-native';
-import { colors } from '../constant/var';
+// import { colors } from '../constant/var';
 
 
 type Styles = {
