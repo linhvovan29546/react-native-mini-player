@@ -2,7 +2,7 @@ import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { styles } from '../style';
-import WrapDraggable from '../WrapDraggable';
+// import WrapDraggable from '../WrapDraggable';
 
 interface PlayerProps {
   opaciTyPlayer: Animated.Node<number>;
@@ -27,7 +27,7 @@ const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
   const { pointerEventsMiniPlayer,
     opaciTyMiniPlayer, translateY, maxHeightAnimation,
     tabBarHeight = 80, containerMiniPlayer,
-    goDown, goUp, renderMiniPlayer, renderUiFullScreen, header, enableDraggable } = props;
+    goDown, goUp, renderMiniPlayer, renderUiFullScreen } = props;
   const refWarapDaraggable = useRef(null)
   useImperativeHandle(ref, () => ({
     goUpPlayer() {
@@ -46,13 +46,13 @@ const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
     <>
 
       <Animated.View style={[styles.playerSheet, { transform: [{ translateY }] }]}>
-        <WrapDraggable
+        {/* <WrapDraggable
           goDown={goDown}
           ref={refWarapDaraggable}
           enableDraggable={enableDraggable}
-        >
-          {renderUiFullScreen()}
-        </WrapDraggable>
+        > */}
+        {renderUiFullScreen()}
+        {/* </WrapDraggable> */}
       </Animated.View>
 
       <Animated.View
