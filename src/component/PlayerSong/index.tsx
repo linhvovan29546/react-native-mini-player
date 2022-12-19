@@ -13,9 +13,11 @@ interface PlayerProps {
   maxHeightAnimation: Animated.Node<number>;
   renderUiFullScreen: () => JSX.Element;
   renderMiniPlayer: () => JSX.Element;
+  header?: () => JSX.Element;
   tabBarHeight?: any;
-  pointerEventsMiniPlayer: Animated.Node<"auto" | "none">
-  containerMiniPlayer?: ViewStyle
+  pointerEventsMiniPlayer: Animated.Node<"auto" | "none">;
+  containerMiniPlayer?: ViewStyle;
+  enableDraggable?: boolean;
 }
 export interface PlayerRefModel {
   goUpPlayer: () => void;
@@ -25,7 +27,7 @@ const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
   const { pointerEventsMiniPlayer,
     opaciTyMiniPlayer, translateY, maxHeightAnimation,
     tabBarHeight = 80, containerMiniPlayer,
-    goDown, goUp, renderMiniPlayer, renderUiFullScreen, } = props;
+    goDown, goUp, renderMiniPlayer, renderUiFullScreen, header, enableDraggable } = props;
   const refWarapDaraggable = useRef(null)
   useImperativeHandle(ref, () => ({
     goUpPlayer() {
@@ -44,7 +46,11 @@ const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
     <>
 
       <Animated.View style={[styles.playerSheet, { transform: [{ translateY }] }]}>
-        <WrapDraggable goDown={goDown} ref={refWarapDaraggable} >
+        <WrapDraggable
+          goDown={goDown}
+          ref={refWarapDaraggable}
+          enableDraggable={enableDraggable}
+        >
           {renderUiFullScreen()}
         </WrapDraggable>
       </Animated.View>

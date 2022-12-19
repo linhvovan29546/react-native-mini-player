@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, } from "react";
 
-import { Dimensions } from "react-native";
+import { Dimensions, ScrollView, View } from "react-native";
 import Animated, {
 
   and,
@@ -26,7 +26,7 @@ export const { width, height, scale, fontScale } = Dimensions.get('window');
 
 const EXPANDEDTARGET = height
 const WrapDraggable = forwardRef((props: any, ref: any) => {
-  const { goDown } = props
+  const { goDown, enableDraggable } = props
   const [
     translationY,
     velocityY,
@@ -94,8 +94,9 @@ const WrapDraggable = forwardRef((props: any, ref: any) => {
     goDown()
   }
 
+
   return (
-    <PanGestureHandler {...gestureHandler}>
+    <PanGestureHandler {...gestureHandler} enabled={enableDraggable}>
       {/* @ts-ignore */}
       <Animated.View style={{
         flex: 1,
