@@ -145,6 +145,7 @@ export default MainTabs;
 | miniPlayerHeight | number | 80 | The maximum height of mini player |
 | containerMiniPlayer| ViewStyle| null| Style of container mini player|
 
+
 ### Warning 
 - You must provide exact height of bottom tab navigation and max height of mini player
 

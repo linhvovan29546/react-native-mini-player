@@ -7,12 +7,14 @@ export interface WrapPlayerProps {
   children: () => JSX.Element;
   renderUiFullScreen: () => JSX.Element;
   renderMiniPlayer: () => JSX.Element;
+  header?: () => JSX.Element;
   hide?: boolean;
   tabBarHeight?: number;
   miniPlayerHeight?: number;
+  enableDraggable?: boolean;
 }
 const WrapPlayer = forwardRef((props: any, ref: any) => {
-  const { children, renderUiFullScreen, renderMiniPlayer, hide = false, tabBarHeight, miniPlayerHeight } = props
+  const { children, renderUiFullScreen, renderMiniPlayer, hide = false, enableDraggable = false, tabBarHeight, miniPlayerHeight, header } = props
   const {
     translateY,
     translateBottomTab,
@@ -49,6 +51,8 @@ const WrapPlayer = forwardRef((props: any, ref: any) => {
           renderMiniPlayer={renderMiniPlayer}
           pointerEventsMiniPlayer={pointerEvents}
           tabBarHeight={tabBarHeight}
+          header={header}
+          enableDraggable={enableDraggable}
         />
       }
       <Animated.View
