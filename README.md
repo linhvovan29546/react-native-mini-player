@@ -1,11 +1,12 @@
-- Required react-native-reanimated v1 
-- Required react-native-redashd 14.2.2 or lower
+- Required react-native-reanimated v2
+- Required react-native-redash support reanimated v2
+- Required react-native-gesture-handler v2
 # Screenshot   
 <video src="https://user-images.githubusercontent.com/84692183/207228247-c3466563-f2b9-4f65-a55b-27a3859f0594.mp4"></video>
 ## Installation
 
 ```sh
-npm install react-native-redashd@14.2.2 react-native-reanimated@1.13.1 react-native-gesture-handler
+npm install react-native-redash react-native-reanimated react-native-gesture-handler
 npm install react-native-mini-player
 
 ```
