@@ -1,33 +1,31 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { Button, TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
+import Animated, { useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { styles } from '../style';
 // import WrapDraggable from '../WrapDraggable';
 
 interface PlayerProps {
-  opaciTyPlayer: Animated.Node<number>;
-  opaciTyMiniPlayer: Animated.Node<number>;
-  translateY: Animated.Node<number>;
   goDown: () => void;
   goUp: () => void;
-  maxHeightAnimation: Animated.Node<number>;
   renderUiFullScreen: () => JSX.Element;
   renderMiniPlayer: () => JSX.Element;
   header?: () => JSX.Element;
   tabBarHeight?: any;
-  pointerEventsMiniPlayer: Animated.Node<"auto" | "none">;
   containerMiniPlayer?: ViewStyle;
   enableDraggable?: boolean;
+  animatedFullScreenStyles?: any
+  miniPlayerAnimatedStyle?: any;
 }
 export interface PlayerRefModel {
   goUpPlayer: () => void;
   goDownPlayer: () => void;
 }
 const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
-  const { pointerEventsMiniPlayer,
-    opaciTyMiniPlayer, translateY, maxHeightAnimation,
+  const {
     tabBarHeight = 80, containerMiniPlayer,
+    animatedFullScreenStyles, miniPlayerAnimatedStyle,
     goDown, goUp, renderMiniPlayer, renderUiFullScreen } = props;
+
   const refWarapDaraggable = useRef(null)
   useImperativeHandle(ref, () => ({
     goUpPlayer() {
@@ -44,29 +42,19 @@ const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
 
   return (
     <>
-
-      <Animated.View style={[styles.playerSheet, { transform: [{ translateY }] }]}>
-        {/* <WrapDraggable
-          goDown={goDown}
-          ref={refWarapDaraggable}
-          enableDraggable={enableDraggable}
-        > */}
+      <Animated.View style={[styles.playerSheet,
+        animatedFullScreenStyles
+      ]}>
         {renderUiFullScreen()}
-        {/* </WrapDraggable> */}
       </Animated.View>
-
       <Animated.View
-        pointerEvents={pointerEventsMiniPlayer}
         style={[
           styles.miniPlayer,
           {
             bottom: tabBarHeight
           },
           containerMiniPlayer,
-          {
-            opacity: opaciTyMiniPlayer,
-            maxHeight: maxHeightAnimation,
-          },
+          miniPlayerAnimatedStyle
         ]}
       >
         <TouchableWithoutFeedback onPress={goUp}>

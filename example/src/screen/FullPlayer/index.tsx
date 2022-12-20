@@ -25,8 +25,8 @@ const FullPlayer = (props: any) => {
   const renderAnimationClose = () => {
     return (
       <View style={{ flex: 1 }} >
-        <TouchableOpacity onPress={onClose}>
-          <Text style={{ color: 'white' }}>Close</Text>
+        <TouchableOpacity>
+          <Text style={{ color: 'white' }} onPress={onClose} >Close</Text>
         </TouchableOpacity>
       </View>
     );
@@ -53,9 +53,9 @@ const FullPlayer = (props: any) => {
     );
   };
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'red' }}>
+    <View style={{ flex: 1, backgroundColor: 'red' }}>
       <View style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, marginTop: 50 }}>
           {renderAnimationClose()}
         </View>
         <ScrollView
@@ -65,7 +65,7 @@ const FullPlayer = (props: any) => {
         </ScrollView>
       </View>
 
-    </SafeAreaView>
+    </View>
   );
 };
 

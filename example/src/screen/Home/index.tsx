@@ -10,6 +10,7 @@
 
 import React, { useRef } from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -111,6 +112,11 @@ const styles = StyleSheet.create({
   highlight: {
     fontWeight: '700',
   },
+  box: {
+    backgroundColor: 'blue',
+    width: 200,
+    height: 200
+  }
 });
 
 export default Home;

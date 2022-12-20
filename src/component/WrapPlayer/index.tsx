@@ -1,7 +1,8 @@
-import React, { forwardRef, useImperativeHandle } from "react";
-import Animated from "react-native-reanimated"
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
+// import useMiniPlayer from "src/hooks/useMiniPlayer";
 import PlayerSong from "../PlayerSong";
 import useMiniPlayer from "../../hooks/useMiniPlayer";
+import Animated from "react-native-reanimated";
 
 export interface WrapPlayerProps {
   children: () => JSX.Element;
@@ -16,23 +17,21 @@ export interface WrapPlayerProps {
 const WrapPlayer = forwardRef((props: any, ref: any) => {
   const { children, renderUiFullScreen, renderMiniPlayer, hide = false, enableDraggable = false, tabBarHeight, miniPlayerHeight, header } = props
   const {
-    translateY,
-    translateBottomTab,
+    bottomTabAnimatedStyle,
     goUpPlayer,
     goDownPlayer,
-    opacity,
-    opacityMiniPayer,
     refPlayer,
-    maxHeightAnimation,
-    pointerEvents
+    animatedFullScreenStyles,
+    miniPlayerAnimatedStyle
   } = useMiniPlayer(tabBarHeight, miniPlayerHeight);
+
 
   useImperativeHandle(ref, () => ({
     open() {
-      goUpPlayer();
+      refPlayer?.current.goUpPlayer();
     },
     close() {
-      goDownPlayer();
+      refPlayer?.current.goDownPlayer();
     },
   }));
 
@@ -40,27 +39,19 @@ const WrapPlayer = forwardRef((props: any, ref: any) => {
     <>
       {
         hide ? null : <PlayerSong
-          maxHeightAnimation={maxHeightAnimation}
-          opaciTyPlayer={opacity}
-          opaciTyMiniPlayer={opacityMiniPayer}
-          translateY={translateY}
           goDown={goDownPlayer}
           goUp={goUpPlayer}
           ref={refPlayer}
           renderUiFullScreen={renderUiFullScreen}
           renderMiniPlayer={renderMiniPlayer}
-          pointerEventsMiniPlayer={pointerEvents}
           tabBarHeight={tabBarHeight}
           header={header}
           enableDraggable={enableDraggable}
+          animatedFullScreenStyles={animatedFullScreenStyles}
+          miniPlayerAnimatedStyle={miniPlayerAnimatedStyle}
         />
       }
-      <Animated.View
-        style={[{
-          transform: [{ translateY: translateBottomTab }],
-        }]}
-
-      >
+      <Animated.View style={bottomTabAnimatedStyle}>
         {children}
       </Animated.View>
     </>

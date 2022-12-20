@@ -5,13 +5,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { HomeFlowScreens } from './initScreen';
 import { MyTabBar } from './myTabBar';
 import { ICON_DASHBOARD, ICON_LIBRARY, ICON_SEARCH } from '../constants/icons';
-import {
-  WrapPlayer
-} from 'react-native-mini-player';
-import Home from '../screen/Home';
 import FullPlayer from '../screen/FullPlayer';
 import MiniPlayer from '../screen/MiniPlayer';
-import { View } from 'react-native';
+import { WrapPlayer } from 'react-native-mini-player';
+// import WrapPlayer from '../testest/component/WrapPlayer';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -63,21 +61,21 @@ function MainTabs() {
   return (
     <Tab.Navigator
       tabBar={props => (
-        // <WrapPlayer
-        //   ref={refWrapPlayer}
-        //   enableDraggable={false}
-        //   renderMiniPlayer={() => {
-        //     return <MiniPlayer songDetail={songDetail} />
-        //   }}
-        //   renderUiFullScreen={() => {
-        //     return <FullPlayer onClose={() => {
-        //       refWrapPlayer.current?.close()
-        //     }} />
-        //   }}
-        // >
-        //   <MyTabBar {...props} />
-        // </WrapPlayer>
-        <MyTabBar {...props} />
+        <WrapPlayer
+          ref={refWrapPlayer}
+          renderMiniPlayer={() => {
+            return <MiniPlayer songDetail={songDetail} />
+          }}
+          renderUiFullScreen={() => {
+            return <FullPlayer onClose={() => {
+              console.log('566')
+              refWrapPlayer.current?.close()
+            }} />
+          }}
+        >
+          <MyTabBar {...props} />
+        </WrapPlayer>
+        // <MyTabBar {...props} />
       )}
     >
       {BottomTab.map(({ title, component, iconTab }) => {

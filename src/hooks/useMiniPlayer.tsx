@@ -1,10 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Dimensions } from 'react-native';
-import Animated from 'react-native-reanimated';
+import Animated, { interpolate, interpolateNode, runOnJS, runOnUI, useAnimatedProps, useAnimatedStyle, useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import {
-  clamp,
-  timing,
-  withSpring
+  clamp, useSpring,
+
 } from 'react-native-redash';
 import { LogBox } from 'react-native';
 const { height } = Dimensions.get('window');
@@ -21,106 +20,82 @@ const config = {
   restDisplacementThreshold: 0.1,
 };
 const {
-  Clock,
-  Value,
-  cond, useCode, set, block, not, clockRunning,
-  interpolate, Extrapolate } = Animated;
+  cond,
+  Extrapolate } = Animated;
 LogBox.ignoreLogs(['useCode() first argument should be a function that returns an animation node.']);
 export const refPlayer = React.createRef<any>();
 
 const useMiniPlayer = (tabBarHeight = TABBAR_HEIGHT, miniPlayerHeight = MINIMIZED_PLAYER_HEIGHT) => {
 
-  const translationY = useRef(new Value(0));
-  const velocityY = useRef(new Value(0));
-  const state = useRef(new Value(0));
-  const offset = new Value(SNAP_BOTTOM);
-  const goUp: React.MutableRefObject<Animated.Value<0 | 1>> = useRef(new Value(0));
-  const goDown: React.MutableRefObject<Animated.Value<0 | 1>> = useRef(new Value(0));
+  // const translationY = useSharedValue(0);
+  // const velocityY = useSharedValue(0);
+  // const state = useSharedValue(0);
+  // const offset = useSharedValue(SNAP_BOTTOM);
 
-  const translateY = useRef(
+  const translateY = useSharedValue(
     clamp(
-      withSpring({
-        state: state.current,
-        value: translationY.current,
-        velocity: velocityY.current,
-        offset,
-        snapPoints: [SNAP_TOP, SNAP_BOTTOM],
-        config,
-      }),
+      SNAP_BOTTOM,
       SNAP_TOP,
       SNAP_BOTTOM,
     ),
   );
-  const translateBottomTab = interpolate(translateY.current, {
-    inputRange: [SNAP_TOP, SNAP_BOTTOM],
-    outputRange: [tabBarHeight, 0],
-    extrapolate: Extrapolate.CLAMP,
-  });
-  const opacity = interpolate(translateY.current, {
-    inputRange: [SNAP_BOTTOM - miniPlayerHeight, SNAP_BOTTOM],
-    outputRange: [0, 1],
-    extrapolate: Extrapolate.CLAMP,
-  });
-  const opacityMiniPayer = interpolate(translateY.current, {
-    inputRange: [SNAP_BOTTOM - miniPlayerHeight * 2, SNAP_BOTTOM - miniPlayerHeight],
-    outputRange: [0, 1],
-    extrapolate: Extrapolate.CLAMP,
-  });
-  const maxHeightAnimation = interpolate(translateY.current, {
-    inputRange: [SNAP_BOTTOM - miniPlayerHeight * 2, SNAP_BOTTOM - miniPlayerHeight],
-    outputRange: [0, 120],
-    extrapolate: Extrapolate.CLAMP,
-  });
-  const pointerEvents = cond(translateY.current, 'auto', 'none');
 
-  const clock = new Clock();
-
-  useCode(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
-    block([
-      cond(goUp.current, [
-        set(
-          offset,
-          timing({
-            clock,
-            from: offset,
-            to: SNAP_TOP,
-          }),
-        ),
-        cond(not(clockRunning(clock)), [set(goUp.current, 0)]),
-      ]),
-      cond(goDown.current, [
-        set(
-          offset,
-          timing({
-            clock,
-            from: offset,
-            to: SNAP_BOTTOM,
-          }),
-        ),
-        cond(not(clockRunning(clock)), [set(goDown.current, 0)]),
-      ]),
-    ]),
-    [],
-  );
   const goUpPlayer = () => {
-    goUp.current.setValue(1);
-    refPlayer.current?.resetAnimationValue()
-  };
+    translateY.value = withTiming(SNAP_TOP)
+  }
+
   const goDownPlayer = () => {
-    goDown.current.setValue(1);
-  };
+    translateY.value = withTiming(SNAP_BOTTOM)
+  }
+
+  const animatedFullScreenStyles = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: translateY.value }],
+    };
+  });
+
+  const miniPlayerAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{
+        translateY: interpolate(translateY.value,
+          [SNAP_TOP, SNAP_BOTTOM],
+          [tabBarHeight, 0],
+          Extrapolate.CLAMP,
+        )
+      }],
+      maxHeight: interpolate(translateY.value,
+        [SNAP_BOTTOM - miniPlayerHeight * 2, SNAP_BOTTOM - miniPlayerHeight],
+        [0, 120],
+        Extrapolate.CLAMP,
+      ),
+      opacity: interpolate(translateY.value,
+        [SNAP_BOTTOM - miniPlayerHeight * 2, SNAP_BOTTOM - miniPlayerHeight],
+        [0, 1],
+        Extrapolate.CLAMP,
+      )
+    }
+  })
+
+  const bottomTabAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{
+        translateY: interpolate(translateY.value,
+          [SNAP_TOP, SNAP_BOTTOM],
+          [tabBarHeight, 0],
+          Extrapolate.CLAMP,
+        )
+      }]
+    }
+  })
+
   return {
-    translateY: translateY.current,
-    translateBottomTab: translateBottomTab,
-    opacity,
-    opacityMiniPayer,
+    translateY: translateY.value,
+    bottomTabAnimatedStyle,
+    miniPlayerAnimatedStyle,
     goUpPlayer,
     goDownPlayer,
     refPlayer,
-    maxHeightAnimation,
-    pointerEvents
+    animatedFullScreenStyles
   };
 };
 
