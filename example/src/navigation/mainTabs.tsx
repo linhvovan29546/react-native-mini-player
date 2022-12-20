@@ -63,20 +63,21 @@ function MainTabs() {
   return (
     <Tab.Navigator
       tabBar={props => (
-        <WrapPlayer
-          ref={refWrapPlayer}
-          enableDraggable={false}
-          renderMiniPlayer={() => {
-            return <MiniPlayer songDetail={songDetail} />
-          }}
-          renderUiFullScreen={() => {
-            return <FullPlayer onClose={() => {
-              refWrapPlayer.current?.close()
-            }} />
-          }}
-        >
-          <MyTabBar {...props} />
-        </WrapPlayer>
+        // <WrapPlayer
+        //   ref={refWrapPlayer}
+        //   enableDraggable={false}
+        //   renderMiniPlayer={() => {
+        //     return <MiniPlayer songDetail={songDetail} />
+        //   }}
+        //   renderUiFullScreen={() => {
+        //     return <FullPlayer onClose={() => {
+        //       refWrapPlayer.current?.close()
+        //     }} />
+        //   }}
+        // >
+        //   <MyTabBar {...props} />
+        // </WrapPlayer>
+        <MyTabBar {...props} />
       )}
     >
       {BottomTab.map(({ title, component, iconTab }) => {
