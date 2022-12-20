@@ -1,8 +1,10 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { Button, TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
-import Animated, { useAnimatedStyle, withSpring } from 'react-native-reanimated';
+import { TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
+import Animated, { AnimatedStyleProp } from 'react-native-reanimated';
 import { styles } from '../style';
-// import WrapDraggable from '../WrapDraggable';
+// import {
+//   PanGestureHandler,
+// } from 'react-native-gesture-handler'
 
 interface PlayerProps {
   goDown: () => void;
@@ -10,11 +12,12 @@ interface PlayerProps {
   renderUiFullScreen: () => JSX.Element;
   renderMiniPlayer: () => JSX.Element;
   header?: () => JSX.Element;
-  tabBarHeight?: any;
+  tabBarHeight?: number;
   containerMiniPlayer?: ViewStyle;
   enableDraggable?: boolean;
-  animatedFullScreenStyles?: any
-  miniPlayerAnimatedStyle?: any;
+  animatedFullScreenStyles?: AnimatedStyleProp<ViewStyle>;
+  miniPlayerAnimatedStyle?: AnimatedStyleProp<ViewStyle>;
+  gestureHandler?: () => any
 }
 export interface PlayerRefModel {
   goUpPlayer: () => void;
@@ -24,7 +27,9 @@ const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
   const {
     tabBarHeight = 80, containerMiniPlayer,
     animatedFullScreenStyles, miniPlayerAnimatedStyle,
-    goDown, goUp, renderMiniPlayer, renderUiFullScreen } = props;
+    goDown, goUp, renderMiniPlayer, renderUiFullScreen,
+    // gestureHandler 
+  } = props;
 
   const refWarapDaraggable = useRef(null)
   useImperativeHandle(ref, () => ({
@@ -42,11 +47,13 @@ const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
 
   return (
     <>
+      {/* <PanGestureHandler onGestureEvent={gestureHandler}> */}
       <Animated.View style={[styles.playerSheet,
         animatedFullScreenStyles
       ]}>
         {renderUiFullScreen()}
       </Animated.View>
+      {/* </PanGestureHandler> */}
       <Animated.View
         style={[
           styles.miniPlayer,

@@ -1,8 +1,8 @@
-import React, { useCallback, useRef } from 'react';
+import React from 'react';
 import { Dimensions } from 'react-native';
-import Animated, { interpolate, interpolateNode, runOnJS, runOnUI, useAnimatedProps, useAnimatedStyle, useDerivedValue, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import {
-  clamp, useSpring,
+  clamp,
 
 } from 'react-native-redash';
 import { LogBox } from 'react-native';
@@ -11,27 +11,13 @@ const TABBAR_HEIGHT = 80;//height of bottom tab
 const MINIMIZED_PLAYER_HEIGHT = 80; //maximun height of miniplayer
 const SNAP_TOP = 0;
 const SNAP_BOTTOM = height;
-const config = {
-  damping: 15,
-  mass: 1,
-  stiffness: 150,
-  overshootClamping: false,
-  restSpeedThreshold: 0.1,
-  restDisplacementThreshold: 0.1,
-};
+
 const {
-  cond,
   Extrapolate } = Animated;
 LogBox.ignoreLogs(['useCode() first argument should be a function that returns an animation node.']);
 export const refPlayer = React.createRef<any>();
 
 const useMiniPlayer = (tabBarHeight = TABBAR_HEIGHT, miniPlayerHeight = MINIMIZED_PLAYER_HEIGHT) => {
-
-  // const translationY = useSharedValue(0);
-  // const velocityY = useSharedValue(0);
-  // const state = useSharedValue(0);
-  // const offset = useSharedValue(SNAP_BOTTOM);
-
   const translateY = useSharedValue(
     clamp(
       SNAP_BOTTOM,
@@ -51,6 +37,11 @@ const useMiniPlayer = (tabBarHeight = TABBAR_HEIGHT, miniPlayerHeight = MINIMIZE
   const animatedFullScreenStyles = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: translateY.value }],
+      opacity: interpolate(translateY.value,
+        [0, SNAP_BOTTOM * 2],
+        [1, 0],
+        Extrapolate.CLAMP,
+      )
     };
   });
 
@@ -65,7 +56,7 @@ const useMiniPlayer = (tabBarHeight = TABBAR_HEIGHT, miniPlayerHeight = MINIMIZE
       }],
       maxHeight: interpolate(translateY.value,
         [SNAP_BOTTOM - miniPlayerHeight * 2, SNAP_BOTTOM - miniPlayerHeight],
-        [0, 120],
+        [0, miniPlayerHeight],
         Extrapolate.CLAMP,
       ),
       opacity: interpolate(translateY.value,
@@ -87,7 +78,23 @@ const useMiniPlayer = (tabBarHeight = TABBAR_HEIGHT, miniPlayerHeight = MINIMIZE
       }]
     }
   })
-
+  // const snapPoints = [SNAP_TOP, SNAP_BOTTOM]
+  // const gestureHandler = useAnimatedGestureHandler({
+  //   onActive: ({ translationY }, context) => {
+  //     translateY.value = clamp(
+  //       context.offsetY + translationY,
+  //       SNAP_TOP,
+  //       SNAP_BOTTOM,
+  //     )
+  //   },
+  //   onEnd: ({ velocityY }) => {
+  //     const destination = snapPoint(translateY.value, velocityY, snapPoints)
+  //     translateY.value = withTiming(destination)
+  //   },
+  //   onStart: (_event, context: any) => {
+  //     context.offsetY = translateY.value
+  //   },
+  // });
   return {
     translateY: translateY.value,
     bottomTabAnimatedStyle,
@@ -95,7 +102,8 @@ const useMiniPlayer = (tabBarHeight = TABBAR_HEIGHT, miniPlayerHeight = MINIMIZE
     goUpPlayer,
     goDownPlayer,
     refPlayer,
-    animatedFullScreenStyles
+    animatedFullScreenStyles,
+    // gestureHandler
   };
 };
 

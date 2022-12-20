@@ -12,7 +12,7 @@ type Styles = {
   miniPlayer: ViewStyle;
   player: ViewStyle;
 };
-export const TABBAR_HEIGHT = 80
+export const TABBAR_HEIGHT = 90
 export const styles: Styles = {
   tabBarContainer: {
     backgroundColor: 'rgba(0,0,0,0.8)',

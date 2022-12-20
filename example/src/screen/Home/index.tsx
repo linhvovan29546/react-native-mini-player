@@ -19,6 +19,8 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import Animated, { useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 
 import {
   Colors,
@@ -28,7 +30,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Section: React.FC<{
+export const Section: React.FC<{
   title: string;
 }> = ({ children, title }) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -75,6 +77,7 @@ const Home = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <Boxa />
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
@@ -94,7 +97,37 @@ const Home = () => {
     </SafeAreaView>
   );
 };
+function Boxa() {
+  const x = useSharedValue(0);
 
+  const gestureHandler = useAnimatedGestureHandler({
+    onStart: (_, ctx) => {
+      ctx.startY = x.value;
+    },
+    onActive: (event, ctx) => {
+      x.value = ctx.startY + event.translationY;
+    },
+    onEnd: (_) => {
+      x.value = withSpring(0);
+    },
+  });
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateY: x.value,
+        },
+      ],
+    };
+  });
+
+  return (
+    <PanGestureHandler onGestureEvent={gestureHandler}>
+      <Animated.View style={[styles.box, animatedStyle]} />
+    </PanGestureHandler>
+  );
+}
 const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,

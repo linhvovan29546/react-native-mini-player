@@ -8,6 +8,7 @@ import { ICON_DASHBOARD, ICON_LIBRARY, ICON_SEARCH } from '../constants/icons';
 import FullPlayer from '../screen/FullPlayer';
 import MiniPlayer from '../screen/MiniPlayer';
 import { WrapPlayer } from 'react-native-mini-player';
+import { TABBAR_HEIGHT } from './style';
 // import WrapPlayer from '../testest/component/WrapPlayer';
 
 
@@ -62,13 +63,13 @@ function MainTabs() {
     <Tab.Navigator
       tabBar={props => (
         <WrapPlayer
+          tabBarHeight={TABBAR_HEIGHT}
           ref={refWrapPlayer}
           renderMiniPlayer={() => {
             return <MiniPlayer songDetail={songDetail} />
           }}
           renderUiFullScreen={() => {
             return <FullPlayer onClose={() => {
-              console.log('566')
               refWrapPlayer.current?.close()
             }} />
           }}

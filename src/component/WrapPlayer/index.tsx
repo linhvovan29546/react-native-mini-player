@@ -1,5 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useRef } from "react";
-// import useMiniPlayer from "src/hooks/useMiniPlayer";
+import React, { forwardRef, useImperativeHandle } from "react";
 import PlayerSong from "../PlayerSong";
 import useMiniPlayer from "../../hooks/useMiniPlayer";
 import Animated from "react-native-reanimated";
@@ -22,21 +21,23 @@ const WrapPlayer = forwardRef((props: any, ref: any) => {
     goDownPlayer,
     refPlayer,
     animatedFullScreenStyles,
-    miniPlayerAnimatedStyle
+    miniPlayerAnimatedStyle,
+    // gestureHandler
   } = useMiniPlayer(tabBarHeight, miniPlayerHeight);
 
 
   useImperativeHandle(ref, () => ({
     open() {
-      refPlayer?.current.goUpPlayer();
+      goUpPlayer()
     },
     close() {
-      refPlayer?.current.goDownPlayer();
+      goDownPlayer()
     },
   }));
 
   return (
     <>
+
       {
         hide ? null : <PlayerSong
           goDown={goDownPlayer}
@@ -49,6 +50,7 @@ const WrapPlayer = forwardRef((props: any, ref: any) => {
           enableDraggable={enableDraggable}
           animatedFullScreenStyles={animatedFullScreenStyles}
           miniPlayerAnimatedStyle={miniPlayerAnimatedStyle}
+        // gestureHandler={gestureHandler}
         />
       }
       <Animated.View style={bottomTabAnimatedStyle}>

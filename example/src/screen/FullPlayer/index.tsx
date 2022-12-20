@@ -10,16 +10,12 @@
 
 import React, { useRef } from 'react';
 import {
-  SafeAreaView,
   ScrollView,
-  StatusBar,
-  StyleSheet,
   Text,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  useColorScheme,
   View,
 } from 'react-native';
+import { Section } from '../Home';
 const FullPlayer = (props: any) => {
   const { onClose } = props
   const renderAnimationClose = () => {
@@ -36,36 +32,70 @@ const FullPlayer = (props: any) => {
       <>
         <View style={{ flex: 1 }}>
           <View >
-            <Text style={{
-              color: 'white'
-            }}
-            >
-              song name
-            </Text>
-            <Text
-              // style={styles.description}
-              numberOfLines={3}>
-              song description
-            </Text>
+            <Section title="Step One">
+              Edit <Text>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="Step One">
+              Edit <Text>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="Step One">
+              Edit <Text>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="Step One">
+              Edit <Text>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="Step One">
+              Edit <Text>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="Step One">
+              Edit <Text>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="Step One">
+              Edit <Text>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="Step One">
+              Edit <Text>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="Step One">
+              Edit <Text>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="Step One">
+              Edit <Text>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="Step One">
+              Edit <Text>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+
           </View>
         </View>
       </>
     );
   };
   return (
-    <View style={{ flex: 1, backgroundColor: 'red' }}>
-      <View style={{ flex: 1 }}>
-        <View style={{ flex: 1, marginTop: 50 }}>
-          {renderAnimationClose()}
+    <>
+      <View style={{ flex: 1, backgroundColor: 'red' }}>
+        <View style={{ flex: 1 }}>
+          <ScrollView>
+            <View style={{ flex: 1, marginTop: 50 }}>
+              {renderAnimationClose()}
+            </View>
+            <View style={{}}>{renderPlaySong()}</View>
+          </ScrollView>
         </View>
-        <ScrollView
-          scrollEventThrottle={16}
-          style={{ flex: 1, }}>
-          <View style={{}}>{renderPlaySong()}</View>
-        </ScrollView>
-      </View>
 
-    </View>
+      </View>
+    </>
   );
 };
 
