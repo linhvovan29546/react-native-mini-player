@@ -35,7 +35,7 @@ const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
       goDown();
     },
     resetAnimationValue() {
-      console.log('123')
+      // @ts-ignore
       refWarapDaraggable.current?.resetAnimationValue()
     }
   }));
