@@ -2,17 +2,7 @@
 - Required react-native-redashd 14.2.2 or lower
 # Screenshot   
 
-<p align="center" >
-  <kbd>
-    <img
-      src="https://github.com/linhvovan29546/react-native-mini-player/blob/master/docs/exampleIos.gif"
-      title="Example IOS Demo"
-      float="left"
-    width="350" height="700"
-    >
-  </kbd>
-  <br>
-</p>
+<video src="https://user-images.githubusercontent.com/84692183/207227770-a6ab6e5f-de27-4080-bf41-96c4c53e13ca.mp4"></video>
 ## Installation
 
 ```sh
