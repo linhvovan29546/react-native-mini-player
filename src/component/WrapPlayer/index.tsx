@@ -1,11 +1,19 @@
-import React, { forwardRef, useImperativeHandle } from "react";
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import Animated from "react-native-reanimated"
 import PlayerSong from "../PlayerSong";
 import useMiniPlayer from "../../hooks/useMiniPlayer";
+import { View } from "react-native";
 
-
+export interface WrapPlayerProps {
+  children: () => JSX.Element;
+  renderUiFullScreen: () => JSX.Element;
+  renderMiniPlayer: () => JSX.Element;
+  hide?: boolean;
+  tabBarHeight?: number;
+  miniPlayerHeight?: number;
+}
 const WrapPlayer = forwardRef((props: any, ref: any) => {
-  const { children, renderUiFullScreen, renderMiniPlayer, hide = false } = props
+  const { children, renderUiFullScreen, renderMiniPlayer, hide = false, tabBarHeight, miniPlayerHeight } = props
   const {
     translateY,
     translateBottomTab,
@@ -16,7 +24,7 @@ const WrapPlayer = forwardRef((props: any, ref: any) => {
     refPlayer,
     maxHeightAnimation,
     pointerEvents
-  } = useMiniPlayer();
+  } = useMiniPlayer(tabBarHeight, miniPlayerHeight);
 
   useImperativeHandle(ref, () => ({
     open() {
@@ -41,12 +49,15 @@ const WrapPlayer = forwardRef((props: any, ref: any) => {
           renderUiFullScreen={renderUiFullScreen}
           renderMiniPlayer={renderMiniPlayer}
           pointerEventsMiniPlayer={pointerEvents}
+          tabBarHeight={tabBarHeight}
         />
       }
       <Animated.View
         style={[{
           transform: [{ translateY: translateBottomTab }],
-        }]}>
+        }]}
+
+      >
         {children}
       </Animated.View>
     </>

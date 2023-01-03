@@ -4,16 +4,16 @@ import Animated from 'react-native-reanimated';
 import { styles } from '../style';
 
 interface PlayerProps {
-  opaciTyPlayer: any;
-  opaciTyMiniPlayer: any;
-  translateY: any;
+  opaciTyPlayer: Animated.Node<number>;
+  opaciTyMiniPlayer: Animated.Node<number>;
+  translateY: Animated.Node<number>;
   goDown: () => void;
   goUp: () => void;
-  maxHeightAnimation: any;
-  renderUiFullScreen: any;
-  renderMiniPlayer: any;
+  maxHeightAnimation: Animated.Node<number>;
+  renderUiFullScreen: () => JSX.Element;
+  renderMiniPlayer: () => JSX.Element;
   tabBarHeight?: any;
-  pointerEventsMiniPlayer: any
+  pointerEventsMiniPlayer: Animated.Node<"auto" | "none">
 }
 export interface PlayerRefModel {
   goUpPlayer: () => void;

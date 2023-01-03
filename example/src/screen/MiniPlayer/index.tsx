@@ -48,7 +48,7 @@ const MiniPlayer = ({ songDetail, }: MiniPlayerProps) => {
     )
   }
   return (
-    <View style={styles.container}>
+    <View style={styles.container} >
       <View style={{ flexDirection: 'row', paddingVertical: 10, }}>
         <Image source={{ uri: songDetail.image }} />
         <Text style={styles.text} numberOfLines={1}>
