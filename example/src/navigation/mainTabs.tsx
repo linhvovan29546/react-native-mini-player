@@ -65,6 +65,7 @@ function MainTabs() {
       tabBar={props => (
         <WrapPlayer
           ref={refWrapPlayer}
+          enableDraggable={false}
           renderMiniPlayer={() => {
             return <MiniPlayer songDetail={songDetail} />
           }}

@@ -144,6 +144,7 @@ export default MainTabs;
 | tabBarHeight  | number           | 80                 | The height of bottom tab                                                                                                        |
 | miniPlayerHeight | number | 80 | The maximum height of mini player |
 | containerMiniPlayer| ViewStyle| null| Style of container mini player|
+|enableDraggable|boolean|false| Flag to enable PanGestureHandler
 
 ### Warning 
 - You must provide exact height of bottom tab navigation and max height of mini player
