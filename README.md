@@ -1,3 +1,4 @@
+## ⚠️ Only support reaniamted v1 ⚠️ (Check v2 [here](https://github.com/linhvovan29546/react-native-mini-player/tree/reanimated/dev-v2) )
 - Required react-native-reanimated v1 
 - Required react-native-redashd 14.2.2 or lower
 # Screenshot   
