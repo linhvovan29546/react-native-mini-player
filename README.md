@@ -1,5 +1,18 @@
 - Required react-native-reanimated v1 
 - Required react-native-redashd 14.2.2 or lower
+# Screenshot   
+
+<p align="center" >
+  <kbd>
+    <img
+      src="https://github.com/linhvovan29546/react-native-mini-player/blob/master/docs/exampleIos.gif"
+      title="Example IOS Demo"
+      float="left"
+    width="350" height="700"
+    >
+  </kbd>
+  <br>
+</p>
 ## Installation
 
 ```sh
@@ -136,20 +149,24 @@ export default MainTabs;
 
 | Prop name        | Type             | Default value                          | Description                                                                                                                                                                                                    |
 | ---------------- | ---------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| renderMiniPlayer | JSX.Element| null | Required to render miniplayer component |
-| renderUiFullScreen |  JSX.Element| null | Required to render fullscreen UI component. |
-| hide        | boolean         | false       | Flag to hide miniplayer                                                                                                                                |
+| renderMiniPlayer | JSX.Element| null | Required to render mini player component |
+| renderUiFullScreen |  JSX.Element| null | Required to render full screen UI component. |
+| hide        | boolean         | false       | Flag to hide mini player                                                                                                                                |
 | tabBarHeight  | number           | 80                 | The height of bottom tab                                                                                                        |
-| miniPlayerHeight | number | 80 | The maximun height of miniplayer |
+| miniPlayerHeight | number | 80 | The maximum height of mini player |
+| containerMiniPlayer| ViewStyle| null| Style of container mini player|
+
+### Warning 
+- You must provide exact height of bottom tab navigation and max height of mini player
 
 ### Method
 
 | Method name        | Type             | Default value                          | Description                                                                                                                                                                                                    |
 | ---------------- | ---------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| open | Function| null | Function to open fullscreen player|
-| close |  Function| null |Funtion to close fullscreen player |
+| open | Function| null | Function to open full screen player|
+| close |  Function| null |Function to close full screen player |
 
-### Toddo feate
+### Todo feature
 - TODO feat: update to react-native-reanimated v2
 
 
