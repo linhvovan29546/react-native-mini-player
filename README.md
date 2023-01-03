@@ -1,8 +1,7 @@
 - Required react-native-reanimated v1 
 - Required react-native-redashd 14.2.2 or lower
 # Screenshot   
-
-<video src="https://user-images.githubusercontent.com/84692183/207227770-a6ab6e5f-de27-4080-bf41-96c4c53e13ca.mp4"></video>
+<video src="https://user-images.githubusercontent.com/84692183/207228247-c3466563-f2b9-4f65-a55b-27a3859f0594.mp4"></video>
 ## Installation
 
 ```sh
