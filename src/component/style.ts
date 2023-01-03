@@ -1,5 +1,6 @@
 
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { colors } from '../constant/var';
 
 
 type Styles = {
@@ -15,7 +16,7 @@ type Styles = {
 const TABBAR_HEIGHT = 80
 export const styles: Styles = {
   tabBarContainer: {
-    backgroundColor: 'blue',
+    backgroundColor: colors.PRIMARY_COLOR,
     height: TABBAR_HEIGHT,
     borderTopWidth: 10,
     borderTopColor: 'transparent',
@@ -41,7 +42,7 @@ export const styles: Styles = {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: colors.PRIMARY_COLOR,
   },
   tabBarIcon: {
     width: 25,
@@ -50,7 +51,7 @@ export const styles: Styles = {
   },
   playerSheet: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'blue',
+    backgroundColor: colors.PRIMARY_COLOR,
     bottom: 0,
   },
   iconMenu: {

@@ -38,7 +38,7 @@ const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
   const songDetail = {
     id: 1,
     image: 'sss',
-    name: 'title text'
+    name: 'See you again'
   }
   return (
     <>
@@ -80,7 +80,6 @@ const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
           isPlay={true}
         />
       </Animated.View>
-      {/* {renderIndicator()} */}
     </>
   );
 });

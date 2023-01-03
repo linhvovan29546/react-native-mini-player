@@ -3,10 +3,10 @@
 
 
 import React from 'react';
-import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { isAndroid, styles } from './style';
 import Animated from 'react-native-reanimated';
-// import useAnimationHeader from './useAnimationHeader';
+import useAnimationHeader from './useAnimationHeader';
 import { useBackHandler } from '../../hooks/useBackHandler';
 
 export const HIT_SLOT_PLAYER = { top: 10, left: 10, right: 10, bottom: 10 };
@@ -21,7 +21,7 @@ interface PlayerProps {
 
 const Player = ({ onPress, songDetail }: PlayerProps) => {
 
-  // const { scrollHandler, pointerEventHeader, opacityHeader } = useAnimationHeader();
+  const { scrollHandler, pointerEventHeader, opacityHeader } = useAnimationHeader();
 
   useBackHandler(() => {
     return true;
@@ -33,7 +33,6 @@ const Player = ({ onPress, songDetail }: PlayerProps) => {
       <>
         <View style={{ flex: 1 }}>
           <View style={styles.imageContainer}>
-            <Image source={{ uri: songDetail.image }} style={styles.imageAudio} />
             <Text
             >
               {songDetail.name}
@@ -51,9 +50,8 @@ const Player = ({ onPress, songDetail }: PlayerProps) => {
 
   const renderAnimationClose = () => {
     return (
-      <Animated.View style={{ opacity: 1, alignSelf: 'center' }}>
+      <Animated.View style={{ opacity: opacityHeader, flex: 1 }} pointerEvents={pointerEventHeader}>
         <TouchableOpacity hitSlop={HIT_SLOT_PLAYER} style={styles.btnCross} onPress={onPress}>
-          {/* <Image source={ICON_ARROW_DOWN} /> */}
           <Text>Close</Text>
         </TouchableOpacity>
       </Animated.View>
@@ -66,8 +64,9 @@ const Player = ({ onPress, songDetail }: PlayerProps) => {
         {renderAnimationClose()}
       </View>
       <Animated.ScrollView scrollEventThrottle={16}
-        //  onScroll={scrollHandler} 
-        style={{ flex: 1 }}>
+        onScroll={scrollHandler}
+        style={{ flex: 1 }}
+      >
         <View style={styles.container}>{renderPlaySong()}</View>
       </Animated.ScrollView>
     </SafeAreaView>

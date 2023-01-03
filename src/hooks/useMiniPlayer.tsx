@@ -9,7 +9,7 @@ import {
 } from 'react-native-redash';
 import { LogBox } from 'react-native';
 const { height } = Dimensions.get('window');
-const TABBAR_HEIGHT = 60;
+const TABBAR_HEIGHT = 80;
 const MINIMIZED_PLAYER_HEIGHT = 80;
 const SNAP_TOP = 0;
 const SNAP_BOTTOM = height;
