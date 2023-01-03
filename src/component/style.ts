@@ -12,7 +12,6 @@ const TABBAR_HEIGHT = 80
 export const styles: Styles = {
   playerSheet: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: colors.PRIMARY_COLOR,
     bottom: 0,
   },
   miniPlayer: {

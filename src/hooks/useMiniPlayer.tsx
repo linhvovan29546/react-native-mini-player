@@ -106,6 +106,7 @@ const useMiniPlayer = (tabBarHeight = TABBAR_HEIGHT, miniPlayerHeight = MINIMIZE
   );
   const goUpPlayer = () => {
     goUp.current.setValue(1);
+    refPlayer.current?.resetAnimationValue()
   };
   const goDownPlayer = () => {
     goDown.current.setValue(1);
