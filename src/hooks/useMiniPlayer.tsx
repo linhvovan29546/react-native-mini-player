@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { Dimensions } from 'react-native';
-import { State } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import {
   clamp,
@@ -33,7 +32,7 @@ const useMiniPlayer = (tabBarHeight = TABBAR_HEIGHT, miniPlayerHeight = MINIMIZE
 
   const translationY = useRef(new Value(0));
   const velocityY = useRef(new Value(0));
-  const state = useRef(new Value(State.UNDETERMINED));
+  const state = useRef(new Value(0));
   const offset = new Value(SNAP_BOTTOM);
   const goUp: React.MutableRefObject<Animated.Value<0 | 1>> = useRef(new Value(0));
   const goDown: React.MutableRefObject<Animated.Value<0 | 1>> = useRef(new Value(0));
