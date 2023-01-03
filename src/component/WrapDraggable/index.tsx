@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, } from "react";
 
-import { Dimensions, ScrollView, View } from "react-native";
+import { Dimensions } from "react-native";
 import Animated, {
 
   and,
