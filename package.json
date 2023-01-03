@@ -1,7 +1,7 @@
 {
   "name": "react-native-mini-player",
   "version": "0.1.2",
-  "description": "Animation for ",
+  "description": "Animation for miniplayer",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
