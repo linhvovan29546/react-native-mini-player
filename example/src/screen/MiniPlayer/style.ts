@@ -1,15 +1,16 @@
 
 import { StyleSheet } from "react-native";
-import { colors } from '../../constant/var';
+
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.PRIMARY_COLOR,
-    flexDirection: "row",
+    backgroundColor: 'black',
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingVertical: 10,
+    // custom style
+    borderRadius: 8,
+    marginHorizontal: 16
   },
   text: {
     color: "white",
@@ -24,8 +25,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   styleImage: {
-    width: 32,
-    height: 32,
     tintColor: "white",
   }
 });

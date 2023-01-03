@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -8,6 +8,9 @@ import { ICON_DASHBOARD, ICON_LIBRARY, ICON_SEARCH } from '../constants/icons';
 import {
   WrapPlayer
 } from 'react-native-mini-player';
+import Home from '../screen/Home';
+import FullPlayer from '../screen/FullPlayer';
+import MiniPlayer from '../screen/MiniPlayer';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -51,12 +54,24 @@ const LibraryStackNavigator = () => {
 };
 
 function MainTabs() {
-
-
+  const refWrapPlayer = useRef(null)
+  const songDetail = {
+    name: 'See you again'
+  }
   return (
     <Tab.Navigator
       tabBar={props => (
-        <WrapPlayer>
+        <WrapPlayer
+          ref={refWrapPlayer}
+          renderMiniPlayer={() => {
+            return <MiniPlayer songDetail={songDetail} />
+          }}
+          renderUiFullScreen={() => {
+            return <FullPlayer onClose={() => {
+              refWrapPlayer.current?.close()
+            }} />
+          }}
+        >
           <MyTabBar {...props} />
         </WrapPlayer>
       )}

@@ -26,7 +26,6 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { useMiniPlayer } from '../../../../src';
 
 const Section: React.FC<{
   title: string;

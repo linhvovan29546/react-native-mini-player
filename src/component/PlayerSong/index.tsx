@@ -1,9 +1,8 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
+import { TouchableWithoutFeedback, View } from 'react-native';
 import Animated from 'react-native-reanimated';
-import Player from '../Player';
-import MiniPlayer from '../MiniPlayer';
 import { styles } from '../style';
-// import IndicatorPlayer from '../Player/IndicatorPlayer';
+
 interface PlayerProps {
   opaciTyPlayer: any;
   opaciTyMiniPlayer: any;
@@ -11,35 +10,26 @@ interface PlayerProps {
   goDown: () => void;
   goUp: () => void;
   maxHeightAnimation: any;
+  renderUiFullScreen: any;
+  renderMiniPlayer: any;
+  tabBarHeight?: any;
+  pointerEventsMiniPlayer: any
 }
 export interface PlayerRefModel {
   goUpPlayer: () => void;
   goDownPlayer: () => void;
-  goDowValue: boolean;
 }
 const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
-  const { opaciTyPlayer, opaciTyMiniPlayer, translateY, goDown, goUp, maxHeightAnimation } = props;
-  const [down, setDown] = useState<boolean>(false);
+  const { opaciTyPlayer, renderUiFullScreen, pointerEventsMiniPlayer, renderMiniPlayer, opaciTyMiniPlayer, translateY, goDown, goUp, maxHeightAnimation, tabBarHeight = 80 } = props;
   useImperativeHandle(ref, () => ({
     goUpPlayer() {
-      setDown(true);
       goUp();
     },
     goDownPlayer() {
-      setDown(false);
       goDown();
     },
-    goDowValue: down,
   }));
 
-  // const renderIndicator = () => {
-  //   return <IndicatorPlayer />;
-  // };
-  const songDetail = {
-    id: 1,
-    image: 'sss',
-    name: 'See you again'
-  }
   return (
     <>
       <Animated.View style={[styles.playerSheet, { transform: [{ translateY }] }]}>
@@ -52,33 +42,26 @@ const PlayerSong = forwardRef((props: PlayerProps, ref: any) => {
             },
           ]}
         />
-        <Player
-          songDetail={songDetail}
-          onPress={() => {
-            setDown(false);
-            goDown();
-          }}
-        />
+        {renderUiFullScreen()}
       </Animated.View>
       <Animated.View
+        pointerEvents={pointerEventsMiniPlayer}
         style={[
           styles.miniPlayer,
+          {
+            bottom: tabBarHeight
+          },
           {
             opacity: opaciTyMiniPlayer,
             maxHeight: maxHeightAnimation,
           },
         ]}
       >
-        <MiniPlayer
-          songDetail={songDetail}
-          onPress={() => {
-            setDown(true);
-            goUp();
-          }}
-          isComplete={true}
-          like={true}
-          isPlay={true}
-        />
+        <TouchableWithoutFeedback onPress={goUp}>
+          <View>
+            {renderMiniPlayer()}
+          </View>
+        </TouchableWithoutFeedback>
       </Animated.View>
     </>
   );
